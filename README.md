@@ -8,10 +8,10 @@ Make sure to use the scripts from https://github.com/diego-vieira/csf-pre_post_s
 Installation is quite straightforward:
 
 ```
-# cd /usr/local/src
-# git clone https://github.com/diego-vieira/csf-post-docker.git
-# cd csf-post-docker
-# sh install.sh
+cd /usr/local/src
+git clone https://github.com/diego-vieira/csf-post-docker.git
+cd csf-post-docker
+sh install.sh
 ```
 
 ## User Feedback
