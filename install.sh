@@ -42,12 +42,12 @@ if [ -f ${CSFPOSTD_PATH}/${SCRIPT_NAME_FINAL} ]; then
 
 			read answer
 
-			if [ ${answer} == "y" -o ${answer} == "n" ]; then
+			if [ ${answer} = "y" -o ${answer} = "n" ]; then
 				ok=1
 			fi
 		done
 
-		if [ ${answer} == "n" ]; then
+		if [ ${answer} = "n" ]; then
 			exit 1
 		fi
 	fi
