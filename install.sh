@@ -57,4 +57,6 @@ cp -f ${SCRIPT_NAME} ${CSFPOSTD_PATH}/${SCRIPT_NAME_FINAL}
 chown root:root ${CSFPOSTD_PATH}/${SCRIPT_NAME_FINAL}
 chmod 700 ${CSFPOSTD_PATH}/${SCRIPT_NAME_FINAL}
 
+echo "Installed!"
+
 exit 0
