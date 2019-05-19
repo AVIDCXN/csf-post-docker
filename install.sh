@@ -29,7 +29,7 @@ if [ -f ${CSFPOSTD_PATH}/${SCRIPT_NAME_FINAL} ]; then
 	md5_0=`md5sum docker.sh | awk '{ print $1 }'`
 	md5_1=`md5sum ${CSFPOSTD_PATH}/${SCRIPT_NAME_FINAL} | awk '{ print $1 }'`
 
-	if [ ${md5_0} == ${md5_1} ]; then
+	if [ ${md5_0} = ${md5_1} ]; then
 		exit 0
 	else
 		ok=0
