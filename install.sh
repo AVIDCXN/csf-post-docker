@@ -14,7 +14,7 @@ if [ ! -d ${CSF_CUSTOM_PATH} ]; then
 fi
 
 PREFIX="None"
-if [ "$1" == "-p" ] || [ "$1" == "--prefix" ]; then
+if [ "$1" = "-p" ] || [ "$1" = "--prefix" ]; then
 	PREFIX=$2
 
 	shift 2
