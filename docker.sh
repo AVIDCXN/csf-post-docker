@@ -76,7 +76,7 @@ containers=`docker ps -q`
 if [ `echo ${containers} | wc -c` -gt "1" ]; then
     for container in ${containers}; do
         netmode=`docker inspect -f "{{.HostConfig.NetworkMode}}" ${container}`
-        if [ "$netmode" == "default" ]; then
+        if [ "$netmode" = "default" ]; then
             DOCKER_NET_INT=${DOCKER_INT}
             ipaddr=`docker inspect -f "{{.NetworkSettings.IPAddress}}" ${container}`
         else
