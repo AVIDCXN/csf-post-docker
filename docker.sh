@@ -107,6 +107,9 @@ if [ `echo ${containers} | wc -c` -gt "1" ]; then
                     iptables_opt_src="-d ${src_ip}/32 "
                 fi
                 iptables -t nat -A DOCKER ${iptables_opt_src}! -i ${DOCKER_NET_INT} -p ${dst_proto} -m ${dst_proto} --dport ${src_port} -j DNAT --to-destination ${ipaddr}:${dst_port}
+                
+                # Allow access from localhost, eg: "curl -v localhost" or via SSH tunnel.
+                iptables -A OUTPUT -o ${DOCKER_NET_INT} -d ${ipaddr}/32 -p tcp -m m ${dst_proto} --dport ${dst_port} -j ACCEPT
             done
         fi
     done
