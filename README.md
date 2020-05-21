@@ -12,6 +12,8 @@ cd /usr/local/src
 sudo git clone https://github.com/Rp70/csf-post-docker.git
 cd csf-post-docker
 sudo sh install.sh
+cd ..
+sudo rm -rf csf-post-docker
 ```
 
 ## User Feedback
