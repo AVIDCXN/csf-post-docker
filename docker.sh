@@ -80,6 +80,13 @@ if [ `echo ${containers} | wc -c` -gt "1" ]; then
             DOCKER_NET_INT=${DOCKER_INT}
             ipaddr=`docker inspect -f "{{.NetworkSettings.IPAddress}}" ${container}`
         else
+            netmode_search=`docker network ls --filter name=${netmode} --format {{.Name}}`
+            if [ "$netmode_search" = "" ]; then
+                netmode_search=`docker network ls --filter id=${netmode} --format {{.Name}}`
+            fi
+            if [ "$netmode_search" != "" ]; then
+                netmode=$netmode_search
+            fi
             bridge=$(docker inspect -f "{{.NetworkSettings.Networks.${netmode}.NetworkID}}" ${container} | cut -c -12)
             DOCKER_NET_INT=`docker network inspect -f '{{"'br-$bridge'" | or (index .Options "com.docker.network.bridge.name")}}' $bridge`
             ipaddr=`docker inspect -f "{{.NetworkSettings.Networks.${netmode}.IPAddress}}" ${container}`
