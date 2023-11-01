@@ -69,6 +69,9 @@ for bridge in $bridges; do
     add_to_nat ${DOCKER_NET_INT} ${subnet}
     add_to_forward ${DOCKER_NET_INT}
     add_to_docker_isolation ${DOCKER_NET_INT}
+
+    # Allow Host machine to access to container ports
+    iptables -I INPUT -i ${DOCKER_NET_INT} -j ACCEPT
 done
 
 containers=`docker ps -q`
@@ -115,7 +118,7 @@ if [ `echo ${containers} | wc -c` -gt "1" ]; then
                 fi
                 iptables -t nat -A DOCKER ${iptables_opt_src}! -i ${DOCKER_NET_INT} -p ${dst_proto} -m ${dst_proto} --dport ${src_port} -j DNAT --to-destination ${ipaddr}:${dst_port}
                 
-                # Allow access from localhost, eg: "curl -v localhost" or via SSH tunnel.
+                # Allow access from localhost inside container, eg: "curl -v localhost" or via SSH tunnel.
                 iptables -I OUTPUT -o ${DOCKER_NET_INT} -d ${ipaddr}/32 -p ${dst_proto} -m ${dst_proto} --dport ${dst_port} -j ACCEPT
             done
         fi
